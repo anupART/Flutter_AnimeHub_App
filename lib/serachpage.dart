@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'animedetail_page.dart';
+
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
 
@@ -26,7 +28,6 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomNavigationBar: CustomBottomNavBar(),
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Column(
@@ -39,16 +40,15 @@ class _SearchPageState extends State<SearchPage> {
                 controller: _searchController,
                 onChanged: (value) {
                   setState(() {});
-                },style: const TextStyle(color: Colors.white),
+                },
+                style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                focusColor: Colors.white,
                   fillColor: Colors.grey[800],
                   hintText: 'Search for anime...',
                   hintStyle: TextStyle(color: Colors.grey),
                   filled: true,
                   prefixIcon: Icon(Icons.search, color: Colors.grey),
                   border: OutlineInputBorder(
-
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide.none,
                   ),
@@ -71,29 +71,41 @@ class _SearchPageState extends State<SearchPage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(3.0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width / 2.3,
-                          height: MediaQuery.of(context).size.height / 5,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[900],
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.network(
-                              anime['imageUrl']!,
-                              width: 120,
-                              height: 145,
-                              fit: BoxFit.cover,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AnimeDetailPage(
+                                  title: anime['title']!,
+                                  imageUrl: anime['imageUrl']!,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 2.3,
+                            height: MediaQuery.of(context).size.height / 5,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[900],
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(
+                                anime['imageUrl']!,
+                                width: 120,
+                                height: 145,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
                       ),
                       const SizedBox(height: 8),
                       Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
+                        padding: const EdgeInsets.only(left: 8.0),
                         child: Text(
-
                           anime['title']!,
                           style: const TextStyle(
                             color: Colors.white,
@@ -116,3 +128,4 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 }
+

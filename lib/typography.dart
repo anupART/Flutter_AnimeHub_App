@@ -23,8 +23,8 @@ class FontClass {
   );
   static TextStyle contentText = TextStyle(
     fontFamily: FONT_FAMILY,
-    fontWeight: FontWeight.bold,
-    fontSize: 14,
+    fontWeight: FontWeight.w300,
+    fontSize: 12,
     color: Colors.white
   );
   static TextStyle infoText = TextStyle(
