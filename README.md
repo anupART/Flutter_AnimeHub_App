@@ -1,4 +1,3 @@
-# animeapp
 # Anime Hub
 
 Anime Hub is a Flutter-based mobile application showcasing anime titles, leveraging the Jikan API for data fetching.
