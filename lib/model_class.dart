@@ -111,7 +111,7 @@ class Data {
   List<Producers>? producers;
   List<Producers>? licensors;
   List<Producers>? studios;
-  List<Producers>? genres;
+  List<Genres>? genres;
   List<Null>? explicitGenres;
   List<Producers>? themes;
   List<Producers>? demographics;
@@ -212,9 +212,9 @@ class Data {
       });
     }
     if (json['genres'] != null) {
-      genres = <Producers>[];
+      genres = <Genres>[];
       json['genres'].forEach((v) {
-        genres!.add(new Producers.fromJson(v));
+        genres!.add(new Genres.fromJson(v));
       });
     }
     if (json['explicit_genres'] != null) {
@@ -349,7 +349,30 @@ class Images {
   }
 }
 
+class Genres {
+  int? malId;
+  String? type;
+  String? name;
+  String? url;
 
+  Genres({this.malId, this.type, this.name, this.url});
+
+  Genres.fromJson(Map<String, dynamic> json) {
+    malId = json['mal_id'];
+    type = json['type'];
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['mal_id'] = this.malId;
+    data['type'] = this.type;
+    data['name'] = this.name;
+    data['url'] = this.url;
+    return data;
+  }
+}
 class Images1 {
   Jpg? jpg;
   Jpg? webp;
