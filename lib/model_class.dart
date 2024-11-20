@@ -303,6 +303,52 @@ class Data {
     return data;
   }
 }
+class Images {
+  Jpg? jpg;
+  Jpg? webp;
+  String? imageUrl;
+  String? smallImageUrl;
+  String? mediumImageUrl;
+  String? largeImageUrl;
+  String? maximumImageUrl;
+
+  Images({
+    this.jpg,
+    this.webp,
+    this.imageUrl,
+    this.smallImageUrl,
+    this.mediumImageUrl,
+    this.largeImageUrl,
+    this.maximumImageUrl
+  });
+
+  Images.fromJson(Map<String, dynamic> json) {
+    jpg = json['jpg'] != null ? Jpg.fromJson(json['jpg']) : null;
+    webp = json['webp'] != null ? Jpg.fromJson(json['webp']) : null;
+    imageUrl = json['image_url'];
+    smallImageUrl = json['small_image_url'];
+    mediumImageUrl = json['medium_image_url'];
+    largeImageUrl = json['large_image_url'];
+    maximumImageUrl = json['maximum_image_url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (jpg != null) {
+      data['jpg'] = jpg!.toJson();
+    }
+    if (webp != null) {
+      data['webp'] = webp!.toJson();
+    }
+    data['image_url'] = imageUrl;
+    data['small_image_url'] = smallImageUrl;
+    data['medium_image_url'] = mediumImageUrl;
+    data['large_image_url'] = largeImageUrl;
+    data['maximum_image_url'] = maximumImageUrl;
+    return data;
+  }
+}
+
 
 class Images1 {
   Jpg? jpg;
@@ -377,38 +423,6 @@ class Trailer {
   }
 }
 
-class Images {
-  String? imageUrl;
-  String? smallImageUrl;
-  String? mediumImageUrl;
-  String? largeImageUrl;
-  String? maximumImageUrl;
-
-  Images(
-      {this.imageUrl,
-        this.smallImageUrl,
-        this.mediumImageUrl,
-        this.largeImageUrl,
-        this.maximumImageUrl});
-
-  Images.fromJson(Map<String, dynamic> json) {
-    imageUrl = json['image_url'];
-    smallImageUrl = json['small_image_url'];
-    mediumImageUrl = json['medium_image_url'];
-    largeImageUrl = json['large_image_url'];
-    maximumImageUrl = json['maximum_image_url'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['image_url'] = this.imageUrl;
-    data['small_image_url'] = this.smallImageUrl;
-    data['medium_image_url'] = this.mediumImageUrl;
-    data['large_image_url'] = this.largeImageUrl;
-    data['maximum_image_url'] = this.maximumImageUrl;
-    return data;
-  }
-}
 
 class Titles {
   String? type;
