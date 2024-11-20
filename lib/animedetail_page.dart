@@ -165,6 +165,20 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                                                 style: FontClass.contentText,
                                               ),
                                               const SizedBox(height: 8),
+
+                                              Text(
+                                                '${anime.genres?.map((p) => p.name).join(', ') ?? 'N/A'}',
+                                                style: FontClass.contentText,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                              const SizedBox(height: 8),
+                                              Text(
+                                                '${anime.producers?.map((p) => p.name).join(', ') ?? 'N/A'}',
+                                                style: FontClass.contentText,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
                                             ],
                                           );
                                         }
@@ -172,20 +186,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                                       return Container();
                                     },
                                   ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    'Adventure, Drama, Fantasy',
-                                    style: FontClass.contentText,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    'AniPlex',
-                                    style: FontClass.contentText,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+
                                 ],
                               ),
                             ),
@@ -200,6 +201,14 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                   child: FutureBuilder<ModelClass>(
                       future: _animeFuture,
                       builder: (context, snapshot) {
+                        String? trailerUrl;
+                        if (snapshot.hasData && snapshot.data?.data != null) {
+                          trailerUrl = snapshot.data!.data!
+                              .where((anime) => anime.trailer?.url != null)
+                              .map((anime) => anime.trailer!.url!)
+                              .firstOrNull;
+                        }
+
                         return ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.red,
@@ -208,20 +217,20 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                             ),
                             minimumSize: Size(screenWidth * 0.9, 50),
                           ),
-                          onPressed: () {
-                            final trailerUrl =
-                                snapshot.data?.data?[0].trailer?.url;
-                            _launchTrailer(trailerUrl);
-                          },
+                          onPressed: trailerUrl != null
+                              ? () => _launchTrailer(trailerUrl)
+                              : null,
                           child: const Text(
                             'Play Trailer',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.bold
+                            ),
                           ),
                         );
-                      }),
+                      }
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
