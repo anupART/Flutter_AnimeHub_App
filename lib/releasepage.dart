@@ -69,13 +69,13 @@ class _ReleasePageState extends State<ReleasePage> {
                   } else if (snapshot.hasData) {
                     var releases = snapshot.data!.data ?? [];
 
-                    // Sort releases based on the release date (latest first)
+
                     releases.sort((a, b) {
                       DateTime? dateA = _parseReleaseDate(a.aired?.string);
                       DateTime? dateB = _parseReleaseDate(b.aired?.string);
-                      if (dateA == null) return 1; // Consider null dates as last
+                      if (dateA == null) return 1; 
                       if (dateB == null) return -1;
-                      return dateB.compareTo(dateA); // Latest first
+                      return dateB.compareTo(dateA);
                     });
 
                     if (releases.isEmpty) {
@@ -103,7 +103,7 @@ class _ReleasePageState extends State<ReleasePage> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Image section
+                      
                               Container(
                                 height: MediaQuery.of(context).size.height / 4,
                                 width: MediaQuery.of(context).size.width / 3,
